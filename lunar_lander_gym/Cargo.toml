@@ -9,3 +9,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 lunar_lander = { path = "../lunar_lander" }
+
+[lints]
+workspace = true

@@ -53,3 +53,11 @@ lunar_lander/src/
 - Render anything — that belongs in `display`
 - Include Python bindings (`#[pyclass]`) — those belong in `lunar_lander_gym`
 - Include UI or input-handling code — that belongs in `game_frontend`
+
+## Testing Requirements
+
+- Every public function must have at least one unit test (`#[cfg(test)]` in the same file).
+- Integration tests that cross crate boundaries go in `tests/` at the crate root.
+- Performance-sensitive functions must have a criterion benchmark in `benches/`.
+- Tests must be deterministic — no wall-clock time, no uncontrolled randomness.
+- Do not use `#[allow(dead_code)]` or `#[allow(unused)]` to silence CI — fix the root cause.

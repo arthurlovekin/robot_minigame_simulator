@@ -25,3 +25,11 @@ Zero dependencies. Safe to pull into WASM bundles without dragging in the physic
 - Add rendering logic — that belongs in `display`
 - Add game logic — that belongs in `lunar_lander`
 - Add any dependencies (keep this crate at zero deps)
+
+## Testing Requirements
+
+- Every public function must have at least one unit test (`#[cfg(test)]` in the same file).
+- Integration tests that cross crate boundaries go in `tests/` at the crate root.
+- Performance-sensitive functions must have a criterion benchmark in `benches/`.
+- Tests must be deterministic — no wall-clock time, no uncontrolled randomness.
+- Do not use `#[allow(dead_code)]` or `#[allow(unused)]` to silence CI — fix the root cause.

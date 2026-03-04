@@ -7,6 +7,7 @@ pub use simulator_types::{BodyId, BodyState, ColliderShape, Contact, PhysicsStat
 pub struct PhysicsEngine;
 
 impl PhysicsEngine {
+    #[must_use]
     pub fn new() -> Self {
         PhysicsEngine
     }

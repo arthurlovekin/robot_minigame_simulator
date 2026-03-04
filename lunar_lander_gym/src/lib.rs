@@ -8,6 +8,7 @@ pub struct LunarLanderGym {
 }
 
 impl LunarLanderGym {
+    #[must_use]
     pub fn new(config: LunarLanderConfig) -> Self {
         LunarLanderGym {
             env: LunarLanderEnv::new(config),

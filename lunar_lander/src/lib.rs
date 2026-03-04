@@ -18,6 +18,7 @@ pub struct LunarLanderEnv {
 }
 
 impl LunarLanderEnv {
+    #[must_use]
     pub fn new(config: LunarLanderConfig) -> Self {
         LunarLanderEnv {
             config,
@@ -42,6 +43,7 @@ impl LunarLanderEnv {
 
     }
 
+    #[must_use]
     pub fn config(&self) -> &LunarLanderConfig {
         &self.config
     }

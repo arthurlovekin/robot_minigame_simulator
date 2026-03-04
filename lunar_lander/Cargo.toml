@@ -6,3 +6,6 @@ edition = "2024"
 [dependencies]
 simulator_types = { path = "../simulator_types" }
 simulator = { path = "../simulator" }
+
+[lints]
+workspace = true

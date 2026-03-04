@@ -58,3 +58,11 @@ simulator/src/
 - Encode game-specific reward logic or episode rules — those belong in game crates
 - Include Python bindings (`#[pyclass]`, `pyo3`) — those belong in `lunar_lander_gym`
 - Model wind, gravity presets, or other game-level environment parameters — callers configure these
+
+## Testing Requirements
+
+- Every public function must have at least one unit test (`#[cfg(test)]` in the same file).
+- Integration tests that cross crate boundaries go in `tests/` at the crate root.
+- Performance-sensitive functions must have a criterion benchmark in `benches/`.
+- Tests must be deterministic — no wall-clock time, no uncontrolled randomness.
+- Do not use `#[allow(dead_code)]` or `#[allow(unused)]` to silence CI — fix the root cause.

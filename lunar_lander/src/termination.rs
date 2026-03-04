@@ -16,6 +16,7 @@ pub enum TerminationReason {
 /// Check whether the current state constitutes a terminal condition.
 ///
 /// Returns `None` if the episode should continue, or `Some(reason)` to end it.
+#[must_use]
 pub fn check_termination(_state: &PhysicsState) -> Option<TerminationReason> {
     // Stub: episodes never terminate.
     None

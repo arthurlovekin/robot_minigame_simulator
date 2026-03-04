@@ -5,3 +5,13 @@ edition = "2024"
 
 [dependencies]
 simulator_types = { path = "../simulator_types" }
+
+[dev-dependencies]
+criterion = { workspace = true }
+
+[[bench]]
+name = "physics"
+harness = false
+
+[lints]
+workspace = true

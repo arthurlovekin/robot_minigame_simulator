@@ -35,3 +35,11 @@ cd ../game_frontend && trunk serve
 - Encode game logic (reward, done flag, episode rules) — those live in `lunar_lander`
 - Handle keyboard or mouse input — that belongs in `game_frontend`
 - Include Python bindings — those belong in `lunar_lander_gym`
+
+## Testing Requirements
+
+- Every public function must have at least one unit test (`#[cfg(test)]` in the same file).
+- Integration tests that cross crate boundaries go in `tests/` at the crate root.
+- Performance-sensitive functions must have a criterion benchmark in `benches/`.
+- Tests must be deterministic — no wall-clock time, no uncontrolled randomness.
+- Do not use `#[allow(dead_code)]` or `#[allow(unused)]` to silence CI — fix the root cause.

@@ -1,0 +1,97 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - name: cargo clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: cargo test
+        run: cargo test --workspace
+
+  metrics:
+    name: Metrics
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install analysis tools
+        run: |
+          cargo install cargo-machete --locked
+          cargo install cargo-deny --locked
+          cargo install cargo-modules --locked
+          cargo install cargo-anatomy --locked
+
+      - name: cargo deny check
+        run: cargo deny check
+
+      - name: cargo machete (unused deps)
+        run: cargo machete
+
+      - name: cargo-modules acyclic check (simulator)
+        run: cargo modules dependencies --acyclic -p simulator
+
+      - name: cargo-modules acyclic check (lunar_lander)
+        run: cargo modules dependencies --acyclic -p lunar_lander
+
+      - name: cargo-modules acyclic check (display)
+        run: cargo modules dependencies --acyclic -p display
+
+      - name: cargo-modules acyclic check (simulator_types)
+        run: cargo modules dependencies --acyclic -p simulator_types
+
+      - name: cargo anatomy report (informational)
+        run: cargo anatomy || true
+        continue-on-error: true
+
+      - name: Post anatomy summary
+        if: always()
+        run: |
+          echo "## cargo anatomy coupling report" >> $GITHUB_STEP_SUMMARY
+          cargo anatomy 2>&1 >> $GITHUB_STEP_SUMMARY || true
+
+  bench:
+    name: Benchmarks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: cargo bench
+        run: cargo bench --workspace
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v4
+        with:
+          name: criterion-results
+          path: target/criterion/
+          if-no-files-found: ignore
