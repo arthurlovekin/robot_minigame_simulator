@@ -1,8 +1,8 @@
-use simulator_types::PhysicsState;
-
 pub mod thruster;
 
-/// An actuator receives a command vector and mutates the physics state (e.g. applies forces).
+use simulator_types::Vec2;
+
+/// An actuator receives a command and returns a body-frame force (N) + torque (N·m).
 pub trait Actuator: Send + Sync {
-    fn apply(&self, input: &[f64], state: &mut PhysicsState);
+    fn apply(&mut self, input: &[f32], dt: f32) -> (Vec2, f32);
 }

@@ -1,6 +1,5 @@
-/// Observation vector: [IMU(3), lidar(16), barometer(1), contact(1), engine_feedback(1)] — 22 values minimum.
-/// Sized to accommodate the default sensor configuration (8 values shown in plan).
-pub type Observation = [f64; 8];
+/// Observation vector: [ax, ay, omega, altitude, contact, thrust_main, thrust_left, thrust_right].
+pub type Observation = [f32; 8];
 
-/// Action vector: throttle commands for the three thrusters, each in [0, 1].
-pub type Action = [f64; 3];
+/// Action vector: throttle commands for [main, left, right] thrusters, each in [0, 1].
+pub type Action = [f32; 3];

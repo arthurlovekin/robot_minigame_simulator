@@ -2,35 +2,25 @@
 #[derive(Debug, Clone)]
 pub struct LunarLanderConfig {
     /// Gravitational acceleration (m/s², positive = downward). Default: 1.62 (Moon).
-    pub gravity: f64,
+    pub gravity: f32,
     /// Wind force magnitude (N). 0.0 = no wind.
-    pub wind_power: f64,
+    pub wind_power: f32,
     /// Turbulence magnitude (N, random per step). 0.0 = no turbulence.
-    pub turbulence_power: f64,
+    pub turbulence_power: f32,
 
     // --- Sensor params ---
-    /// IMU noise standard deviation (m/s², rad/s).
-    pub imu_noise_stddev: f64,
-    /// IMU bias drift rate (m/s²/s, rad/s/s).
-    pub imu_bias_drift: f64,
-    /// Lidar ray count.
+    pub imu_noise_stddev: f32,
+    pub imu_bias_drift: f32,
     pub lidar_num_rays: usize,
-    /// Lidar maximum range (metres).
-    pub lidar_max_range: f64,
-    /// Lidar range noise standard deviation (metres).
-    pub lidar_noise_stddev: f64,
-    /// Barometer noise standard deviation (metres).
-    pub barometer_noise_stddev: f64,
-    /// Engine feedback noise standard deviation (normalised 0–1).
-    pub engine_feedback_noise_stddev: f64,
+    pub lidar_max_range: f32,
+    pub lidar_noise_stddev: f32,
+    pub barometer_noise_stddev: f32,
+    pub engine_feedback_noise_stddev: f32,
 
     // --- Actuator params ---
-    /// Maximum thruster force (Newtons).
-    pub thruster_max_force: f64,
-    /// Thruster force noise standard deviation (fraction of max_force).
-    pub thruster_noise_stddev: f64,
-    /// Thruster spin-up time constant (seconds).
-    pub thruster_spin_up_time_constant: f64,
+    pub thruster_max_force: f32,
+    pub thruster_noise_stddev: f32,
+    pub thruster_spin_up_time_constant: f32,
 }
 
 impl Default for LunarLanderConfig {
