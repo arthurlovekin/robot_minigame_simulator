@@ -1,0 +1,10 @@
+[workspace]
+members = [
+    "simulator_types",
+    "simulator",
+    "display",
+    "lunar_lander",
+    "game_frontend",
+    "lunar_lander_gym",
+]
+resolver = "2"

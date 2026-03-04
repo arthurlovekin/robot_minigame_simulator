@@ -1,0 +1,11 @@
+[package]
+name = "lunar_lander_gym"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "lunar_lander_gym"
+crate-type = ["cdylib"]
+
+[dependencies]
+lunar_lander = { path = "../lunar_lander" }
