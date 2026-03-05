@@ -6,14 +6,24 @@ allow = [
     "BSD-2-Clause",
     "BSD-3-Clause",
     "Unicode-3.0",
+    "Zlib",      # const_format, slotmap (Leptos deps)
+    "BSL-1.0",   # xxhash-rust (Leptos dep)
 ]
 
 [bans]
-multiple-versions = "deny"   # one version per dep
-wildcards         = "deny"   # no wildcard version specs
+multiple-versions    = "deny"
+wildcards            = "deny"
+allow-wildcard-paths = true   # path deps have no version — not a real wildcard
+skip = [
+    # Leptos 0.7 transitively requires both versions; cannot be resolved upstream.
+    { name = "convert_case",    version = "=0.6.0" },
+    { name = "hashbrown",       version = "=0.14.5" },
+    { name = "thiserror",       version = "=1.0.69" },
+    { name = "thiserror-impl",  version = "=1.0.69" },
+]
 
 [advisories]
 db-path  = "~/.cargo/advisory-db"
 db-urls  = ["https://github.com/rustsec/advisory-db"]
-vulnerability = "deny"
-unmaintained  = "warn"
+yanked       = "deny"
+unmaintained = "none"

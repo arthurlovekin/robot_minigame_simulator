@@ -17,7 +17,8 @@ cd ../game_frontend && trunk serve
 
 ## Public Interface
 
-- `render(state: &PhysicsState) -> String`
+- `RenderConfig` — plain-data struct: `width_px`, `height_px`, `pixels_per_metre`, `camera_centre`
+- `render(state: &PhysicsState, config: &RenderConfig) -> String`
 
 ## Dependencies
 

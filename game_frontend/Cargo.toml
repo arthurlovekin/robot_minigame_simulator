@@ -2,12 +2,24 @@
 name = "game_frontend"
 version = "0.1.0"
 edition = "2024"
+publish = false
+license.workspace = true
 
 [[bin]]
 name = "game_frontend"
 path = "src/main.rs"
 
 [dependencies]
+leptos                   = { workspace = true }
+wasm-bindgen             = { workspace = true }
+web-sys                  = { workspace = true, features = [
+    "Document", "KeyboardEvent", "Window",
+    "HtmlElement", "Element", "EventTarget", "Event",
+] }
+console_error_panic_hook = { workspace = true }
+lunar_lander             = { path = "../lunar_lander" }
+display                  = { path = "../display" }
+simulator_types          = { path = "../simulator_types" }
 
 [lints]
 workspace = true

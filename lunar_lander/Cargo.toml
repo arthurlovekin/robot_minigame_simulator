@@ -2,6 +2,8 @@
 name = "lunar_lander"
 version = "0.1.0"
 edition = "2024"
+publish = false
+license.workspace = true
 
 [dependencies]
 simulator_types = { path = "../simulator_types" }

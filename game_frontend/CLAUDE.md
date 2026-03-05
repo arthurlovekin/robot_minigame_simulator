@@ -23,7 +23,8 @@ Binary crate — no public library API. Entry point: `src/main.rs`.
 ## Inputs from other crates
 
 - `LunarLanderEnv`, `Action`, `Observation` from `lunar_lander`
-- `render(state: &PhysicsState) -> String` from `display`
+- `render(state: &PhysicsState, config: &RenderConfig) -> String` from `display`
+- `RenderConfig` from `display` — viewport size, scale, camera centre
 
 ## Separation of Concerns — DO and DO NOT
 
